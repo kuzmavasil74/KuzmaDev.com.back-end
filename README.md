@@ -47,19 +47,22 @@ Copy code
 npm start
 The server will run on port 5001.
 
-API
+## API
+
 Send Email
 URL: /api/contact
 Method: POST
 Request Body:
 json
 Copy code
+
 {
   "name": "Your Name",
   "email": "email@example.com",
   "subject": "Subject of the message",
   "message": "Your message"
 }
+
 Response:
 
 Success: {"message": "Email sent successfully"}
