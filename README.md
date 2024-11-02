@@ -72,6 +72,6 @@ Error: {"message": "Failed to send email"}
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-### Replacements:
+Replacements:
 
 Make sure to replace `yourusername` with your GitHub username in the `git clone` command, and update `EMAIL_USER` and `EMAIL_PASS` in the `.env` section with your actual credentials.
