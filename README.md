@@ -68,7 +68,7 @@ Response:
 Success: {"message": "Email sent successfully"}
 Error: {"message": "Failed to send email"}
 
-## Licence
+## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
