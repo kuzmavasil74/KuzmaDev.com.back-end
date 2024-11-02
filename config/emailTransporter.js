@@ -1,3 +1,4 @@
+const nodemailer = require('nodemailer')
 const dotenv = require('dotenv')
 dotenv.config() // Loads environment variables from the .env file
 
