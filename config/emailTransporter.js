@@ -1,3 +1,4 @@
+const dotenv = require('dotenv')
 dotenv.config() // Loads environment variables from the .env file
 
 // Setting up the transporter for sending emails
