@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express') // Main file where the Express server is configured and routes are connected.
 const cors = require('cors')
 const contactRoutes = require('./routes/contactRoutes')
 
