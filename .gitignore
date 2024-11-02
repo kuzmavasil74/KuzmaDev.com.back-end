@@ -1,19 +1,9 @@
-package-lock.json
-.DS_Store
-Thumbs.db
-coverage/
-.vscode/
-.idea/
-dist/
-build/
+/node_modules
+
 .env
-*.log
-node_modules/
 
+.vscode
+.DS_Store
+.idea
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-yarn.lock
-coverage/
+/temp
