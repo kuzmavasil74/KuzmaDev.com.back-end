@@ -4,7 +4,7 @@ const contactRoutes = require('./routes/contactRoutes')
 
 const app = express()
 const corsOptions = {
-  origin: 'https://kuzma-dev-com.vercel.app/',
+  origin: 'https://kuzma-dev-com.vercel.app',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 }
