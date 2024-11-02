@@ -22,28 +22,23 @@ This project is the server-side part for the contact form of the KuzmaDev.com we
 
    ```bash
    git clone https://github.com/yourusername/KuzmaDev.com.back-end.git
-Navigate to the project directory:
+   Navigate to the project directory:
+   ```
 
-bash
-Copy code
 cd KuzmaDev.com.back-end
 Install dependencies:
 
-bash
-Copy code
 npm install
 Create a .env file in the root directory of the project and add your credentials:
 
 makefile
-Copy code
+
 PORT=5001
 EMAIL_USER=your-email@gmail.com
 EMAIL_PASS=your-email-password
 Usage
 Start the server:
 
-bash
-Copy code
 npm start
 The server will run on port 5001.
 
@@ -54,13 +49,12 @@ URL: /api/contact
 Method: POST
 Request Body:
 json
-Copy code
 
 {
-  "name": "Your Name",
-  "email": "email@example.com",
-  "subject": "Subject of the message",
-  "message": "Your message"
+"name": "Your Name",
+"email": "email@example.com",
+"subject": "Subject of the message",
+"message": "Your message"
 }
 
 Response:
