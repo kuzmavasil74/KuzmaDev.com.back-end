@@ -24,10 +24,11 @@ app.post('/api/contact', async (req, res) => {
 
   // Налаштування email-повідомлення
   const mailOptions = {
-    from: email,
+    from: `${email}`,
     to: process.env.EMAIL_USER,
-    subject: `Contact Form Submission: ${subject}`,
+    subject: `Contact Form Submission with KuzmaDev.com: ${subject}`,
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    replyTo: email,
   }
 
   // Надсилання email
