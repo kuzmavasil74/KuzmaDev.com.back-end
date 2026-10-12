@@ -4,16 +4,16 @@ const ContactSchema = require('../utils/validationSchemas/contactValidation.js')
 
 const sendContactEmail = async (req, res) => {
   // Asynchronous function for processing requests to send an email.
-  const { error } = ContactSchema.validate(req.body) // Destructuring data from the request body.
+  const { error, value } = ContactSchema.validate(req.body) // Validating and trimming the request body.
 
   if (error) {
     return res.status(400).json({ message: error.details[0].message }) // Return validation error if data fails validation.
   }
-  const { name, email, subject, message } = req.body // Destructuring data from the request body.
+  const { name, email, subject, message } = value // Destructuring the validated data.
 
   const mailOptions = {
     // Email configuration settings.
-    from: `${email}`, // Sender's address - the user's email.
+    from: `"KuzmaDev.com" <${process.env.EMAIL_USER}>`, // Gmail only sends from the authenticated account; the visitor goes in replyTo.
     to: process.env.EMAIL_USER, // Recipient's address - determined from an environment variable.
     subject: `Contact Form Submission from KuzmaDev.com: ${subject}`, // Email subject.
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`, // Email body containing the name, email, and message.
