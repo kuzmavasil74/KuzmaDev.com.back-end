@@ -1,71 +1,67 @@
-# KuzmaDev Contact Form API
+# KuzmaDev.com: contact form API
 
-This project is the server-side part for the contact form of the KuzmaDev.com website, allowing users to send messages via email.
+Small Express API behind the contact form on [kuzma-dev-com.vercel.app](https://kuzma-dev-com.vercel.app). It validates the message and forwards it by email through Gmail.
 
-## Table of Contents
+Frontend: [KuzmaDev.com](https://github.com/kuzmavasil74/KuzmaDev.com)
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API](#api)
-- [License](#license)
+## Stack
 
-## Requirements
+Node.js, Express 4, Joi, Nodemailer, CORS, dotenv. Hosted on Render.
 
-- Node.js (version 14 or higher)
-- npm (version 6 or higher)
-- Gmail account to send emails
+## Run locally
 
-## Installation
-
-1. Clone the repository to your local machine:
-
-   ```bash
-   git clone https://github.com/yourusername/KuzmaDev.com.back-end.git
-   Navigate to the project directory:
-   ```
-
-cd KuzmaDev.com.back-end
-Install dependencies:
-
+```bash
 npm install
-Create a .env file in the root directory of the project and add your credentials:
+cp .env.example .env   # then fill it in
+npm start              # http://localhost:5001
+```
 
-makefile
+### Environment variables
 
-PORT=5001
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-email-password
-Usage
-Start the server:
-
-npm start
-The server will run on port 5001.
+| Variable       | Description                                                                    |
+| -------------- | ------------------------------------------------------------------------------ |
+| `PORT`         | Port to listen on (default `5001`)                                             |
+| `EMAIL_USER`   | Gmail address that sends and receives the messages                             |
+| `EMAIL_PASS`   | Gmail [app password](https://support.google.com/accounts/answer/185833), not the account password |
+| `CORS_ORIGINS` | Extra allowed origins, comma-separated (e.g. a custom domain). `https://kuzma-dev-com.vercel.app` is always allowed |
 
 ## API
 
-Send Email
-URL: /api/contact
-Method: POST
-Request Body:
-json
+### `POST /api/contact`
 
+```json
 {
-"name": "Your Name",
-"email": "email@example.com",
-"subject": "Subject of the message",
-"message": "Your message"
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "subject": "Project idea",
+  "message": "Hi Vasyl, I'd like to talk about..."
 }
+```
 
-Response:
+Rules: `name` 3–100 characters, `email` a valid address, `subject` 3–200, `message` 10–5000. Values are trimmed; the body may be at most 20 kB.
 
-Success: {"message": "Email sent successfully"}
-Error: {"message": "Failed to send email"}
+| Status | Body                                       |
+| ------ | ------------------------------------------ |
+| 200    | `{ "message": "Email sent successfully" }` |
+| 400    | `{ "message": "<validation error>" }`      |
+| 500    | `{ "message": "Failed to send email" }`    |
 
-## License
+The email is sent from `EMAIL_USER` (Gmail does not allow other senders) with the visitor's address in `Reply-To`, so replying in Gmail answers the visitor.
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+### `GET /health`
 
-Replacements:
+Returns `{ "status": "ok" }`. Point an uptime monitor at it to keep the free Render instance from sleeping; otherwise the first request after idle takes about 30 seconds.
 
-Make sure to replace `yourusername` with your GitHub username in the `git clone` command, and update `EMAIL_USER` and `EMAIL_PASS` in the `.env` section with your actual credentials.
+## Project layout
+
+```
+server.js                                    app setup, CORS, routes
+routes/contactRoutes.js                      POST /api/contact
+controllers/contactController.js             validation and sending
+config/emailTransporter.js                   Nodemailer Gmail transport
+utils/validationSchemas/contactValidation.js Joi schema
+```
+
+## Deploying on Render
+
+Build command `npm install`, start command `npm start`, and the environment variables above.
